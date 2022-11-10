@@ -1,0 +1,237 @@
+﻿<Window x:Name="QualityAnalyzer" x:Class="QualityAnalyzer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QualityAnalyzer"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="480" MinWidth="800" MaxHeight="700" MaxWidth="1200" Background="#FF8B8585" WindowStyle="None" ToolTip="Quality Analyzer" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                   Source="/Resources/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*" ></RowDefinition>
+            <RowDefinition Height="338*"></RowDefinition>
+            <RowDefinition Height="61*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69*"></ColumnDefinition>
+            <ColumnDefinition Width="656*"></ColumnDefinition>
+            <ColumnDefinition Width="69*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.ColumnSpan="3" Fill="#FFFDFF00" Margin="0,20,0,0" MaxHeight="40"/>
+        <Image x:Name="logo"  Margin="0,20,0,0" Width="50" Height="50" Source="/Images/analysis-icon.ico"/>
+        <StackPanel Grid.Column="2" Margin="0,20,0,0" Orientation="Horizontal" >
+            <Button x:Name="PART_Minimize" Click="PART_Minimize_Click" Style="{DynamicResource TileButtonStyle}" ToolTip="Minimize">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/minimize-icon-23774.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="PART_Resiize" Click="PART_Resiize_Click"  Style="{DynamicResource TileButtonStyle}" ToolTip="Resize">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/maximize-window-xxl.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="PART_CLOSE" Click="PART_CLOSE_Click"  Style="{DynamicResource TileButtonStyle}" ToolTip="Close">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/close-icon.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <TabControl Name="tabControl" Grid.Row="1" Grid.Column="1" Background="{x:Null}" ItemContainerStyle="{StaticResource TabItemStyle}" >
+            <TabItem Name="welcomeTabItem" Header="Welcome" IsSelected="True" IsEnabled="False" >
+              
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"></RowDefinition>
+                        <RowDefinition Height="359*"></RowDefinition>
+                        <RowDefinition Height="46*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"></ColumnDefinition>
+                        <ColumnDefinition Width="171*"></ColumnDefinition>
+                        <ColumnDefinition Width="16*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1" Style="{DynamicResource HeaderMessage}">Quality Analyzer</Label>
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="3,3,3,3" BorderBrush="#FFFDFF00">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Grid.Column="1"  Style="{DynamicResource HeaderMessage}">Welcome to Quality Analyzer Application.</Label>
+                            <Label Grid.Column="1"  Style="{DynamicResource HeaderMessage}">This Application is for analyzing recorded data files.</Label>
+                            <Label Grid.Column="1"  Style="{DynamicResource HeaderMessage}">Please Click the 'Next' button to start.</Label>
+                            <Button x:Name="Start" Click="Start_Click" Style="{DynamicResource ButtonStyle}" Width="96" Margin="0,20,0,0" >Next</Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Name="chooseFileTabItem"  Header="Select File" IsEnabled="False"  >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"></RowDefinition>
+                        <RowDefinition Height="359*"></RowDefinition>
+                        <RowDefinition Height="46*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"></ColumnDefinition>
+                        <ColumnDefinition Width="171*"></ColumnDefinition>
+                        <ColumnDefinition Width="16*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1" Style="{DynamicResource HeaderMessage}">Please choose your file or drag and drop it to following box</Label>
+                    <Border Name="chooseFileDropDownBorder"  BorderThickness="3,3,3,3" Grid.Row="1" Grid.Column="1" ToolTip="Choose or Drag And Drop Your File Here" AllowDrop="True" ScrollViewer.VerticalScrollBarVisibility="Disabled" DragDrop.Drop="Border_Drop" MouseLeftButtonDown="chooseFileDropDownBorder_MouseLeftButtonDown">
+                        <Border.Effect>
+                            <DropShadowEffect/>
+                        </Border.Effect>
+                        <Border.BorderBrush>
+                            <DrawingBrush Viewport="0,0,18,18" ViewportUnits="Absolute" TileMode="Tile">
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <GeometryDrawing Brush="#FFFDFF00">
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <RectangleGeometry Rect="0,0,50,50" />
+                                                    <RectangleGeometry Rect="50,50,50,50" />
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Border.BorderBrush>
+                        <TextBlock TextAlignment="Center" Style="{DynamicResource TextBlockMessage}" Margin="0" Padding="100" >Choose or Drag and Drop Your File Here</TextBlock>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Name="viewInputTabItem"  Header="View Input"  IsEnabled="False" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"></RowDefinition>
+                        <RowDefinition Height="359*"></RowDefinition>
+                        <RowDefinition Height="46*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"></ColumnDefinition>
+                        <ColumnDefinition Width="174*"></ColumnDefinition>
+                        <ColumnDefinition Width="13*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="1" Style="{DynamicResource HeaderMessage}">This is your inpute data, To analyz data pres the yellow button
+                    </Label>
+                    <Grid  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="inputDataGrid" IsReadOnly="True" Grid.Row="1" AutoGenerateColumns="False"  Background="{x:Null}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Measurement" Width="Auto" Binding="{Binding Measurement}"/>
+                                <DataGridTextColumn Header="Axis" Width="Auto" Binding="{Binding Axis}"/>
+                                <DataGridTextColumn Header="Value" Width="*" Binding="{Binding Value}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Vertical" Grid.Row="2" HorizontalAlignment="Right">
+                            <Label Name="inputTotalRowsLable" Style="{DynamicResource HeaderMessage}" FontSize="10">Total Rows:</Label>
+
+                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
+                                <Button Content="Previous" Click="PreviousButton_Click" Margin="2"/>
+                                <Label Name="inputLable" Margin="2" Foreground="#FFFDFF00">
+                                    <Label.Content>
+                                        <Binding Path="CurrentPage">
+                                            <Binding.StringFormat>Current Page: {0}</Binding.StringFormat>
+                                        </Binding>
+                                    </Label.Content>
+                                </Label>
+                                <Button Content="Next" Click="NextButton_Click" Margin="2" Width="50"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <Button Grid.Row="2" Grid.Column="1" x:Name="ProcessButton" Click="ProcessButton_Click"  Style="{DynamicResource ButtonStyle}" ToolTip="Click to Analyze quality and Show Result">
+                        Analyze quality
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem Name="ProgressBarTabItem"  Visibility="Collapsed"  IsEnabled="False" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"></RowDefinition>
+                        <RowDefinition Height="359*"></RowDefinition>
+                        <RowDefinition Height="46*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"></ColumnDefinition>
+                        <ColumnDefinition Width="171*"></ColumnDefinition>
+                        <ColumnDefinition Width="16*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label Style="{StaticResource HeaderMessage}" >Your Data Is Proccessing, Please be pationt...</Label>
+                        <ProgressBar x:Name="progressBarControl" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center"  Minimum="0" Maximum="15" Width="400" Height="50" BorderThickness="5" >
+                            <ProgressBar.Foreground>
+                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFC4C52C"/>
+                                    <GradientStop Color="#FFFDFF00" Offset="0.152"/>
+                                </LinearGradientBrush>
+                            </ProgressBar.Foreground>
+                        </ProgressBar>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="viewResultTabItem" Header="View Result"  IsEnabled="False" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"></RowDefinition>
+                        <RowDefinition Height="359*"></RowDefinition>
+                        <RowDefinition Height="46*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"></ColumnDefinition>
+                        <ColumnDefinition Width="174*"></ColumnDefinition>
+                        <ColumnDefinition Width="13*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label  Grid.Column="1" Style="{DynamicResource HeaderMessage}">This is the analyze result, Please press the yellow button to start from begining</Label>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="resultDataGrid"  Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False" Background="{x:Null}" ScrollViewer.CanContentScroll="True" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="AxisLable" Width="Auto" Binding="{Binding AxisLable}"/>
+                                <DataGridTextColumn Header="Variance" Width="Auto" Binding="{Binding Variance}"/>
+                                <DataGridTextColumn Header="TrendStatus" Width="Auto" Binding="{Binding TrendStatus}"/>
+                                <DataGridTextColumn Header="Outliers" Width="*" Binding="{Binding Outliers}" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+                            <Button Name="ResultPreviousBtn" Content="Previous" Click="ResultPreviousBtn_Click" Margin="2"/>
+                            <Label Name="resltLable" Margin="2" Foreground="#FFFDFF00">
+                                <Label.Content>
+                                    <Binding Path="CurrentPage">
+                                        <Binding.StringFormat>Current Page: {0}</Binding.StringFormat>
+                                    </Binding>
+                                </Label.Content>
+                            </Label>
+                            <Button Name="ResultNextBtn" Content="Next" Click="ResultNextBtn_Click" Margin="2" Width="50"/>
+                        </StackPanel>
+                    </Grid>
+                    <Button Grid.Row="2" Grid.Column="1" x:Name="ClearButton" Click="ClearButton_Click"  Style="{DynamicResource ButtonStyle}" Width="120" ToolTip="Click to Start From begining">
+                        Start Again
+                    </Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label Name="messageLable" Grid.Row="2" Grid.Column="1" Style="{DynamicResource ErrorMessage}" Visibility="Collapsed"></Label>
+    </Grid>
+</Window>

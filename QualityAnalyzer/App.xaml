@@ -1,0 +1,9 @@
+﻿<Application x:Class="QualityAnalyzer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:QualityAnalyzer"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+       
+    </Application.Resources>
+</Application>
